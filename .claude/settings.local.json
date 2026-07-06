@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(npx expo install @react-native-async-storage/async-storage)",
+      "PowerShell(Test-Path node_modules/@react-native-async-storage/async-storage; if \\(Test-Path node_modules/@react-native-async-storage/async-storage/package.json\\) { \\(Get-Content node_modules/@react-native-async-storage/async-storage/package.json | ConvertFrom-Json\\).version })",
+      "PowerShell(npm install @react-native-async-storage/async-storage@2.2.0)",
+      "PowerShell($env:NODE_OPTIONS=\"--use-system-ca\"; npm install @react-native-async-storage/async-storage@2.2.0)",
+      "WebFetch(domain:docs.expo.dev)",
+      "Bash(npx expo *)",
+      "Bash(NODE_OPTIONS=\"--use-system-ca\" npx expo install expo-notifications)",
+      "Bash(node -e ' *)",
+      "Bash(timeout 40 npx expo start --web --non-interactive)",
+      "Bash(CI=1 timeout 120 npx expo export --platform web)",
+      "Bash(CI=1 timeout 120 npx expo export --platform android)",
+      "Bash(netstat -ano)"
+    ]
+  }
+}
