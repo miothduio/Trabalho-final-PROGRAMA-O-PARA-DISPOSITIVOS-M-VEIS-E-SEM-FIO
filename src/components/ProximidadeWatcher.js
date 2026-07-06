@@ -22,9 +22,14 @@ export default function ProximidadeWatcher() {
   const notificadasRef = useRef(new Set());
   const tarefasRef = useRef(tarefas);
   const raioRef = useRef(raioAlerta);
+  const ultimaLocalizacaoRef = useRef(null);
 
   useEffect(() => {
     tarefasRef.current = tarefas;
+
+    if (ultimaLocalizacaoRef.current) {
+      verificarProximidade(ultimaLocalizacaoRef.current);
+    }
   }, [tarefas]);
 
   useEffect(() => {
@@ -90,7 +95,19 @@ export default function ProximidadeWatcher() {
 
   function verificarProximidade(coords) {
 
+    ultimaLocalizacaoRef.current = coords;
+
     const raio = raioRef.current;
+
+    console.log(
+      `[proximidade] localização recebida: lat=${coords.latitude} lon=${coords.longitude} | total tarefas=${tarefasRef.current.length}`
+    );
+
+    tarefasRef.current.forEach((tarefa) => {
+      console.log(
+        `[proximidade] tarefa bruta id=${tarefa.id} titulo="${tarefa.titulo}" concluida=${tarefa.concluida} latitude=${JSON.stringify(tarefa.latitude)} longitude=${JSON.stringify(tarefa.longitude)}`
+      );
+    });
 
     tarefasRef.current
 

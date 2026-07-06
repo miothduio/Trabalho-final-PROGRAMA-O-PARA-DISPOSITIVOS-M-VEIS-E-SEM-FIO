@@ -44,6 +44,15 @@ export default function FormScreen({ navigation, route }) {
 
     if (route.params) {
 
+      if (route.params.titulo)
+        setTitulo(route.params.titulo);
+
+      if (route.params.descricao)
+        setDescricao(route.params.descricao);
+
+      if (route.params.prioridade)
+        setPrioridade(route.params.prioridade);
+
       if (route.params.latitude)
         setLatitude(route.params.latitude);
 
@@ -245,7 +254,15 @@ export default function FormScreen({ navigation, route }) {
 
             onPress={()=>
               navigation.navigate(
-                "Mapa"
+                "Mapa",
+                {
+                  titulo,
+                  descricao,
+                  prioridade,
+                  nomeLocal,
+                  latitude,
+                  longitude,
+                }
               )
             }
 

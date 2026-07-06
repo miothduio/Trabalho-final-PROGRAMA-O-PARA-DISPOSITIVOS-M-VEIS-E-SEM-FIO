@@ -27,7 +27,7 @@ export default function MapaTarefasScreen({ navigation }) {
   }, []);
 
   const tarefasComLocal = tarefas.filter(
-    (tarefa) => tarefa.latitude && tarefa.longitude
+    (tarefa) => !tarefa.concluida && tarefa.latitude && tarefa.longitude
   );
 
   async function centralizarNaLocalizacaoAtual() {

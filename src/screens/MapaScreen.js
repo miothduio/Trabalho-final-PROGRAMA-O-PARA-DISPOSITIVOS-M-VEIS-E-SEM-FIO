@@ -184,6 +184,12 @@ export default function MapaScreen({ navigation, route }) {
 
         id: idTarefa,
 
+        titulo: route?.params?.titulo,
+
+        descricao: route?.params?.descricao,
+
+        prioridade: route?.params?.prioridade,
+
         latitude: marker.latitude,
 
         longitude: marker.longitude,

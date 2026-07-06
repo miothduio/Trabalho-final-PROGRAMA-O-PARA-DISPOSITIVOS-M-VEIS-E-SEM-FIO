@@ -38,6 +38,15 @@ export async function configurarNotificacoes() {
 
 }
 
+export function configurarListenerDeResposta(aoTocarNotificacao) {
+
+  return Notifications.addNotificationResponseReceivedListener((resposta) => {
+    const tarefaId = resposta.notification.request.content.data?.tarefaId;
+    aoTocarNotificacao(tarefaId);
+  });
+
+}
+
 export async function notificarProximidade(tarefa, distanciaMetros) {
 
   try {

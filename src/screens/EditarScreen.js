@@ -43,6 +43,12 @@ export default function EditarScreen({ navigation, route }) {
   useEffect(() => {
     if (!route.params) return;
 
+    if (route.params.titulo) setTitulo(route.params.titulo);
+
+    if (route.params.descricao) setDescricao(route.params.descricao);
+
+    if (route.params.prioridade) setPrioridade(route.params.prioridade);
+
     if (route.params.latitude) setLatitude(route.params.latitude);
 
     if (route.params.longitude) setLongitude(route.params.longitude);
@@ -180,6 +186,12 @@ export default function EditarScreen({ navigation, route }) {
 
                 {
                   id,
+
+                  titulo,
+
+                  descricao,
+
+                  prioridade,
 
                   latitude,
 

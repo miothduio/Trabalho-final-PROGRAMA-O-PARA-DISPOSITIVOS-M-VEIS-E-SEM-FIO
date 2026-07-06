@@ -5,18 +5,26 @@ import React, {
 } from "react";
 
 import { supabase } from "../services/supabase";
+import { useAuth } from "./AuthContext";
 
 export const TarefasContext = createContext({});
 
 export function TarefasProvider({ children }) {
+  const { session } = useAuth();
+
   const [tarefas, setTarefas] = useState([]);
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
   const [erro, setErro] = useState(null);
 
   useEffect(() => {
-    carregarTarefas();
-  }, []);
+    if (session) {
+      carregarTarefas();
+    } else {
+      setTarefas([]);
+      setLoading(false);
+    }
+  }, [session]);
 
   async function carregarTarefas() {
     try {
@@ -26,6 +34,8 @@ export function TarefasProvider({ children }) {
       const {
         data: { user },
       } = await supabase.auth.getUser();
+
+      console.log("[tarefas] carregarTarefas user:", user?.id ?? null);
 
       if (!user) {
         setTarefas([]);
@@ -39,6 +49,8 @@ export function TarefasProvider({ children }) {
         .order("created_at", {
           ascending: false,
         });
+
+      console.log("[tarefas] resultado:", data?.length ?? 0, "erro:", error?.message ?? null);
 
       if (error) throw error;
 
